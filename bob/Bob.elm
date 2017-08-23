@@ -1,6 +1,6 @@
 module Bob exposing (hey)
 
-import Regex
+import Char
 
 
 isEmpty : String -> Bool
@@ -8,14 +8,19 @@ isEmpty msg =
     String.isEmpty (String.trim msg)
 
 
-hasLetters : String -> Bool
-hasLetters msg =
-    Regex.contains (Regex.regex "[a-zA-Z]") msg
+hasUpperCaseLetters : String -> Bool
+hasUpperCaseLetters msg =
+    String.any Char.isUpper msg
+
+
+isUpperCase : String -> Bool
+isUpperCase msg =
+    String.toUpper msg == msg
 
 
 isShouting : String -> Bool
 isShouting msg =
-    hasLetters msg && String.toUpper msg == msg
+    hasUpperCaseLetters msg && isUpperCase msg
 
 
 isQuestion : String -> Bool
